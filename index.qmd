@@ -194,29 +194,37 @@ px.line(
 ) 
 ```
 
-* We can add a title to our plot
+* We can add a title to our plot by adding `#| title: Number of visitors accross months for each year` to the top of the chunk
 
-```{python}
-#| title: Number of visitors accross months for each year
-px.line(  
-  df, x="month", y="visitors", 
-  color="park", animation_group="month",
-  animation_frame="year",
-  range_y=[0,1000000] 
-) 
-```
 
 # Altair
 
 ```{python}
+#| eval: false
 import altair as alt
 
+df["month"] = df["month"].astype("category")
+df["month"] = pd.Categorical(
+    df["month"], categories=["JAN", "FEB", "MAR",
+                             "APR", "MAY", "JUN",
+                             "JUL", "AUG", "SEP",
+                             "OCT", "NOV", "DEC"], ordered=True
+)
+
+year_slider = alt.binding_range(min=1979, max=2023, step=1, name="Year")
+slider_selection = alt.selection_point(bind=year_slider, fields=['year'])
+
 # make the chart
-alt.Chart(df).mark_point().encode(
+alt.Chart(df).mark_line().encode(
     x='month',
-    y='visitors',
+    #y='visitors',
+    y = alt.Y('visitors', scale=alt.Scale(domain=[0, 1000000])),
     color='park',
-).interactive()
+).interactive().add_params(
+    slider_selection
+).transform_filter(
+    slider_selection
+).properties(title="Visitor Numbers")
 
 ```
 
