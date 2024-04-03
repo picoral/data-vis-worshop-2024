@@ -54,6 +54,8 @@ pip install plotly
 
 ![](images/environment.png)
 
+# Data inspection
+
 * Click on `df` to open the data frame. Find a peer to discuss the following questions
 
    1. What are the variables in the data?
@@ -81,6 +83,8 @@ theme(axis.text.x=element_blank(),
       axis.text.y=element_blank(), 
       axis.ticks.y=element_blank()) 
 ```
+
+# Plotting the data
 
 * Let's add another python chunk to the code. We will map `year` to `x` and `total` to `y`. Our geometry (how the data is drawn on the plot) will be dots, so we will use `px.scatter()`
 
@@ -200,5 +204,19 @@ px.line(
   animation_frame="year",
   range_y=[0,1000000] 
 ) 
+```
+
+# Altair
+
+```{python}
+import altair as alt
+
+# make the chart
+alt.Chart(df).mark_point().encode(
+    x='month',
+    y='visitors',
+    color='park',
+).interactive()
+
 ```
 
