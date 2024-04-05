@@ -197,10 +197,17 @@ px.line(
 * We can add a title to our plot by adding `#| title: Number of visitors accross months for each year` to the top of the chunk
 
 
+# Changing layout
+
+* add `author` to yaml header
+* add `## Row {height=50%}`
+
+Read [the documentation](https://quarto.org/docs/dashboards/layout.html) for more info
+
 # Altair
 
 ```{python}
-#| eval: false
+#| eval: true
 import altair as alt
 
 df["month"] = df["month"].astype("category")
