@@ -241,7 +241,7 @@ px.scatter(
 
 ```{python}
 #| eval: true
-#| title: Number of visitors accross months for each year
+#| echo: true
 px.scatter(  
   df, x="month", y="visitors", 
   color="park", animation_group="month",
@@ -254,6 +254,7 @@ px.scatter(
 * The scale changes over the years, let's make it so it's always the same
 
 ```{python}
+#| echo: true
 px.scatter(  
   df, x="month", y="visitors", 
   color="park", animation_group="month",
@@ -267,6 +268,7 @@ px.scatter(
 * Let's change the dots to a line, so we will use `px.line` instead
 
 ```{python}
+#| echo: true
 px.line(  
   df, x="month", y="visitors", 
   color="park", animation_group="month",
