@@ -197,8 +197,6 @@ df = df.loc[df["year"] != 2024]
 
 ## Faceting
 
-* We can also facet our plot:
-
 With columns:
 
 ```{python}
@@ -210,6 +208,9 @@ px.scatter(
 ) 
 ```
 
+
+## Faceting
+
 With rows:
 
 ```{python}
@@ -220,3 +221,65 @@ px.scatter(
   color="park", facet_row="park"
 ) 
 ```
+
+## Filtering
+
+* Let's look at just one year (let's filter the data again)
+
+```{python}
+#| eval: true
+#| echo: true
+px.scatter(  
+  df.loc[df["year"] == 2023], x="month", y="visitors", 
+  facet_col="park"
+) 
+```
+
+## Animation
+
+* We can use animation, so we can slide through the years
+
+```{python}
+#| eval: true
+#| title: Number of visitors accross months for each year
+px.scatter(  
+  df, x="month", y="visitors", 
+  color="park", animation_group="month",
+  animation_frame="year",
+) 
+```
+
+## Scales
+
+* The scale changes over the years, let's make it so it's always the same
+
+```{python}
+px.scatter(  
+  df, x="month", y="visitors", 
+  color="park", animation_group="month",
+  animation_frame="year",
+  range_y=[0,1000000] 
+) 
+```
+
+## Line plots
+
+* Let's change the dots to a line, so we will use `px.line` instead
+
+```{python}
+px.line(  
+  df, x="month", y="visitors", 
+  color="park", animation_group="month",
+  animation_frame="year",
+  range_y=[0,1000000] 
+) 
+```
+
+# Layout
+
+* Add a title to our plot by adding `#| title: Number of visitors accross months for each year` to the top of the chunk
+* Add `author` to yaml header
+* Add `## Row {height=50%}`
+
+Read [the documentation](https://quarto.org/docs/dashboards/layout.html) for more info
+
